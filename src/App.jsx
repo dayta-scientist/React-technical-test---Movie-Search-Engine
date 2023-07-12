@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import './App.css'
 import responseMovies from "./mocks/with-results.json"
 import { useMovies } from './hooks/useMovies'
 import { Mapping } from './components/Mapping'
 import { useSearch } from './hooks/useSearch'
+import debounce from "just-debounce-it"
 
 function App() {
   // const movies = responseMovies.Search
@@ -11,6 +12,14 @@ function App() {
   const [sort, setSort] = useState(false)
   const { search, error, setSearch } = useSearch()
   const { movies, getFetch, loading } = useMovies( {search, sort })
+
+  const debouncedGetMovies = useCallback(
+    debounce(search => {
+      //console.log('search', search)
+      getFetch({ search })
+    }, 300)
+    , [getFetch]
+  )
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -20,6 +29,7 @@ function App() {
   const handleChange = (event) => {
     const newMovie = event.target.value 
     setSearch(newMovie)
+    debouncedGetMovies(newMovie)
   }
 
   const handleSort = () => {
