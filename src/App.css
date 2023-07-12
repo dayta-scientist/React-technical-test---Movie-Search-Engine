@@ -3,16 +3,45 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  max-width: 800px;
+  /* width: 100%;
+  max-width: 800px; */
 }
 
 .form {
   display: flex;
   justify-content: space-between;
   gap: 0.2rem;
+  align-items: center;
 
 }
 ul {
   list-style: none;
 }
+
+.movies {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 32px;
+  margin: 0;
+  padding: 0;
+}
+
+.movie {
+  text-align: center;
+}
+
+.movie h3 {
+  /* margin: 0; */
+  display: grid;
+  grid-template-rows: minmax(50px, 2fr);
+}
+
+.movie img {
+  border-radius: 8px;
+  /* margin-top: 16px; */
+  min-width: 100px;
+  max-height: 300px;
+  margin: 5px;
+  object-fit: cover;
+}
+
