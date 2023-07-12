@@ -8,8 +8,8 @@ import { useSearch } from './hooks/useSearch'
 function App() {
   // const movies = responseMovies.Search
   // const [search, setSearch] = useState()
-  const { movies, getFetch, loading } = useMovies()
   const { search, error, setSearch } = useSearch()
+  const { movies, getFetch, loading } = useMovies( {search })
 
   const handleSubmit = (event) => {
     event.preventDefault()
