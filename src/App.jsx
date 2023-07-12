@@ -8,7 +8,7 @@ import { useSearch } from './hooks/useSearch'
 function App() {
   // const movies = responseMovies.Search
   // const [search, setSearch] = useState()
-  const { movies, getFetch } = useMovies()
+  const { movies, getFetch, loading } = useMovies()
   const { search, error, setSearch } = useSearch()
 
   const handleSubmit = (event) => {
@@ -28,14 +28,17 @@ function App() {
           <h1>Movie search engine</h1>
           <form className='form' onSubmit={handleSubmit}>
             <label htmlFor="search">Search a film</label>
-            <input onChange={handleChange} type="text" placeholder='Avengers, Star Wars...' id='search' />
+            <input style={{border: '1px solid transparent', borderColor: error ? 'red' : 'transparent'}} onChange={handleChange} type="text" placeholder='Avengers, Star Wars...' id='search' />
             <button type='submit'>Search</button>
           </form>
           {error && <p style={{color: 'red' }}>{error}</p>}
         </header>
 
         <main>
-          <Mapping movies={movies} />
+          {
+            loading ? <p>Loading ...</p> : <Mapping movies={movies} />
+          }
+          
         </main>
       </div>
     </>

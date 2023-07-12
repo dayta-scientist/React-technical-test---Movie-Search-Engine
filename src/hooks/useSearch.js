@@ -18,6 +18,7 @@ export const useSearch = () => {
 
     if(search?.length < 3) {
       setError('Must be at least 3 characters')
+      return
     }
 
     setError(null)
